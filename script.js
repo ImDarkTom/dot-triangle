@@ -1,5 +1,19 @@
 console.log("               /\\               \n              /__\\              \n             /\\  /\\             \n            /__\\/__\\            \n           /\\      /\\           \n          /__\\    /__\\          \n         /\\  /\\  /\\  /\\         \n        /__\\/__\\/__\\/__\\        \n       /\\              /\\       \n      /__\\            /__\\      \n     /\\  /\\          /\\  /\\     \n    /__\\/__\\        /__\\/__\\    \n   /\\      /\\      /\\      /\\   \n  /__\\    /__\\    /__\\    /__\\  \n /\\  /\\  /\\  /\\  /\\  /\\  /\\  /\\ \n/__\\/__\\/__\\/__\\/__\\/__\\/__\\/__\\");
 
+//Setup color
+const paramColor = new URL(window.location.toString()).searchParams.get('color');
+var color;
+
+if(paramColor==null) {
+    color = chroma.random().saturate(2);
+    console.log(`TIP: You can get to this color later by going to\n${window.location.href}?color=${color.hex().substring(1)}`)
+} else {
+    color = chroma(paramColor.toString());
+}
+
+
+
+//Setup canvas
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -33,8 +47,6 @@ let y = ((y1 + r1 * (y2 - y1) + r2 * (y3 - y1)) + start_vertex[1]) / 2;
 
 let delay = 1000;
 let counter = 0;
-
-const color = chroma.random().saturate(2);
 
 // Iteratively add points halfway between the current dot and a uniformly randomly chosen vertex
 function addDot() {
